@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+
+        button[type="submit"] {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.content }}</p>
+    <hr>
+
+    <h2>Comments:</h2>
+    <ul>
+        {% for comment in comments %}
+        <li>{{ comment.user.username }} - {{ comment.created_at }}:<br>
+            {{ comment.content }}</li>
+        {% empty %}
+        <li>No comments yet.</li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+    {% if user.is_authenticated %}
+    <h2>Add Comment:</h2>
+    <form method="POST" action="{% url 'add_comment' post.id %}">
+        {% csrf_token %}
+        <textarea name="content" required></textarea>
+        <br>
+        <button type="submit">Add Comment</button>
+    </form>
+    {% else %}
+    <p>Login to Comment</p>
+    {% endif %}
+
+    <hr>
+    <h2>Reactions:</h2>
+    <p>Likes: {{ post.likes.count }}</p>
+    <p>Dislikes: {{ post.dislikes.count }}</p>
+    <a href="{% url 'like_post' post.id %}">Like</a>
+    <a href="{% url 'dislike_post' post.id %}">Dislike</a>
+</body>
+</html>
