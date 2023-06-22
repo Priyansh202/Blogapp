@@ -66,7 +66,6 @@ def signup(request):
 
 
         messages.success(request,"Your account is created" )
-        # welcome email
        
 
         
