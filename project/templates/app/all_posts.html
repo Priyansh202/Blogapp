@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,8 +30,43 @@
             margin-top: 20px;
         }
     </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+
 </head>
 <body>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" >SymDa</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                   
+                    <li><a href="{% url 'signout' %}">Signout</a></li>
+                    <li><a href="/create_post">FORUM </a><li>
+                       <li> <a href="/about">Home</a></li>
+                      <li>  <a href="{% url 'profile' %}">Profile</a></li>
+                   <!---   <li>  <a href="/post_detail post.id ">{{ post.title }}</a></li>-->
+                  
+                
+                    
+                    
+                    
+                    
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div>
+    </nav>
     {% for post in posts %}
     <h2>{{ post.title }}</h2>
     <p>{{ post.content }}</p>
@@ -41,8 +78,11 @@
     <p>No comments yet.</p>
     {% endfor %}
     <hr>
-
+    {%if user.is_authenticated%}
+    <a href="{% url 'post_detail' post.id %}" class="btn btn-info btn-xs">comment</a> 
+    {% endif %}
     {% endfor %}
+    
     <hr>
 </body>
 </html>

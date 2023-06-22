@@ -112,7 +112,7 @@ def signout(request):
     logout(request)
     messages.success(request,"logged out succesfullly")
     return redirect('home')
-@login_required
+
 def profile(request):
     
     contex={

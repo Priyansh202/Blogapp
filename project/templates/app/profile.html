@@ -24,15 +24,17 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="{% url 'home' %}">Poll Application</a>
+					<a class="navbar-brand" href="{% url 'home' %}">SymDa</a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav">
 						
-                        
-					
+                    
+						<li>  <a href="{% url 'all_posts' %}">All Posts</a></li>
+						<li> <a href="/about">Home</a></li>
+						<li><a href="/create_post">FORUM </a><li>
                         <li><a href="{% url 'signout' %}">signout</a></li>
                         
 					</ul>
